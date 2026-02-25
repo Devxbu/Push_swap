@@ -1,9 +1,11 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-static void exit_err(int *nums) {
+static void exit_err(int *nums, int *indexes) {
   if (nums)
     free(nums);
+  if (indexes)
+    free(indexes);
   write(2, "Error\n", 6);
   exit(1);
 }
@@ -11,6 +13,7 @@ static void exit_err(int *nums) {
 int main(int argc, char **argv) {
   t_mode mode;
   int *nums;
+  int *indexes;
   int size;
 
   if (argc < 2)
@@ -19,6 +22,8 @@ int main(int argc, char **argv) {
   mode = parse_mode(&argc, &argv);
   nums = validate_input(argc, argv, &size);
   if (!nums)
-    exit_err(NULL);
-  free(nums);
+    exit_err(NULL, NULL);
+  indexes = index_finder(size, nums);
+  if (!indexes)
+    exit_err(nums, NULL);
 }
