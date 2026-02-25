@@ -29,6 +29,8 @@ int main(int argc, char **argv) {
   a = create_stack(size, indexes);
   if (!a)
     exit_err(nums, indexes);
-
+  if (!is_sorted(a))
+    execute_strategy(mode, &a, size);
   free_all(nums, indexes, a);
+  return (0);
 }
