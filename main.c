@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <stdio.h>
 
 static void exit_err(int *nums, int *indexes) {
   if (nums)
@@ -12,6 +11,7 @@ static void exit_err(int *nums, int *indexes) {
 
 int main(int argc, char **argv) {
   t_mode mode;
+  t_list *a;
   int *nums;
   int *indexes;
   int size;
@@ -26,4 +26,9 @@ int main(int argc, char **argv) {
   indexes = index_finder(size, nums);
   if (!indexes)
     exit_err(nums, NULL);
+  a = create_stack(size, indexes);
+  if (!a)
+    exit_err(nums, indexes);
+
+  free_all(nums, indexes, a);
 }
