@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adaptive.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:31:47 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:31:48 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/02/28 11:42:47 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

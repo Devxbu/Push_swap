@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_strategy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:31:53 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:31:53 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/02/28 07:19:53 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 19:28:13 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:28:14 by melmbaz          ###   ########.fr       */
+/*   Created: 2026/02/28 11:41:48 by melmbaz           #+#    #+#             */
+/*   Updated: 2026/02/28 11:42:25 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include <limits.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -73,3 +76,4 @@ void				adaptive_sort(t_list **a, int size);
 void				simple_sort(t_list **a, int size);
 void				medium_sort(t_list **a, int size);
 void				complex_sort(t_list **a, int size);
+#endif
