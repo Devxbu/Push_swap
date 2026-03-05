@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:00:56 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/28 12:08:50 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/03 20:36:34 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,51 @@
 
 static void	sort_three(t_list **a)
 {
-	int	top;
-	int	mid;
-	int	bot;
+	int	oneth;
+	int	twoth;
+	int	threeth;
 
-	top = (*a)->content;
-	mid = (*a)->next->content;
-	bot = (*a)->next->next->content;
-	if (top > mid && mid < bot && top < bot)
+	oneth = (*a)->content;
+	twoth = (*a)->next->content;
+	threeth = (*a)->next->next->content;
+	if (oneth > twoth && twoth < threeth && oneth < threeth)
 		sa(a);
-	else if (top > mid && mid > bot)
+	else if (oneth > twoth && twoth > threeth)
 	{
 		sa(a);
 		rra(a);
 	}
-	else if (top > mid && mid < bot && top > bot)
+	else if (oneth > twoth && twoth < threeth && oneth > threeth)
 		ra(a);
-	else if (top < mid && mid > bot && top < bot)
+	else if (oneth < twoth && twoth > threeth && oneth < threeth)
 	{
 		sa(a);
 		ra(a);
 	}
-	else if (top < mid && mid > bot && top > bot)
+	else if (oneth < twoth && twoth > threeth && oneth > threeth)
 		rra(a);
 }
 
-static int	find_minimum_pos(t_list *a)
+static int	find_min_position(t_list *a)
 {
 	int	pos;
-	int	min_pos;
-	int	min;
+	int	tmp_min_value;
+	int	tmp_min_node;
 
 	pos = 0;
-	min_pos = 0;
-	min = a->content;
+	tmp_min_value = 0;
+	tmp_min_node = a->content;
 	while (a)
 	{
-		if (a->content < min)
+		if (a->content < tmp_min_node)
 		{
-			min = a->content;
-			min_pos = pos;
+			tmp_min_node = a->content;
+			tmp_min_value = pos;
 		}
 		a = a->next;
 		pos++;
 	}
-	return (min_pos);
+	return (tmp_min_value);
 }
 
 static void	bring_to_top(t_list **a, int position, int size)
@@ -87,7 +87,7 @@ static void	sort_small(t_list **a, t_list **b, int size)
 	i = 0;
 	while (i < to_push)
 	{
-		bring_to_top(a, find_minimum_pos(*a), current_size);
+		bring_to_top(a, find_min_position(*a), current_size);
 		pb(a, b);
 		current_size--;
 		i++;

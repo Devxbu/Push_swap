@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:35:38 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:35:39 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/04 18:35:00 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static char	**generate_arr(int argc, char **argv, int *total)
 
 	*total = 0;
 	i = 1;
-	i = 1;
 	while (i < argc)
 	{
 		if (only_spaces(argv[i]))
@@ -113,7 +112,6 @@ int	*validate_input(int argc, char **argv, int *size)
 	if (argc < 2)
 		exit(0);
 	arr = generate_arr(argc, argv, size);
-	// Check this part (if arr is NULL, does always exit_err(NULL, NULL)?)
 	if (!arr)
 		exit_err(NULL, NULL);
 	nums = malloc(sizeof(int) * (*size));

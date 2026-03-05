@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   safe_atoi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:37:31 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:37:46 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/04 06:09:53 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static long	result_finder(const char **str1, int sign)
+static long	result_finder(const char **str1, int sign_of_number_from_atoi)
 {
 	char	*str;
 	long	result;
@@ -22,8 +22,8 @@ static long	result_finder(const char **str1, int sign)
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
-		if ((sign == 1 && result > INT_MAX) || (sign == -1 &&
-				-result < INT_MIN))
+		if ((sign_of_number_from_atoi == 1 && result > MAX_INTEGER)
+			|| (sign_of_number_from_atoi == -1 && (-result) < MIN_INTEGER))
 			return (0);
 		str++;
 	}

@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 11:41:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/28 11:42:25 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/03 20:39:40 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define MAX_INTEGER 2147483647
+# define MIN_INTEGER -2147483648
 
 typedef struct s_list
 {
@@ -63,6 +66,7 @@ void				free_all(int *values, int *indexes, t_list *stack);
 int					*index_finder(int size, int *arr);
 int					is_sorted(t_list *stack);
 t_list				*create_stack(int size, int *arr);
+void				bring_to_top_b(t_list **b, int position, int size);
 
 // Parsing
 t_mode				parse_mode(int *argc, char ***argv);
