@@ -12,28 +12,39 @@
 
 #include "../push_swap.h"
 
-void	adaptive_sort(t_list **a, int size)
-{
-	double	disorder;
+void adaptive_sort(t_list **a, int size, int bench) {
+  double disorder;
 
-	if (size <= 5)
-	{
-		simple_sort(a, size);
-		return ;
-	}
-	disorder = compute_disorder(*a, size);
-	if (size <= 100)
-	{
-		if (disorder < 0.15)
-			simple_sort(a, size);
-		else
-			medium_sort(a, size);
-	}
-	else
-	{
-		if (disorder < 0.10)
-			medium_sort(a, size);
-		else
-			complex_sort(a, size);
-	}
+  // Look again the sizes it might be wrong here
+  disorder = compute_disorder(*a, size);
+  if (size <= 5) {
+    simple_sort(a, size, 1, disorder, bench);
+    return;
+  }
+  if (size <= 100) {
+    if (disorder < 0.15)
+      simple_sort(a, size, 1, disorder, bench);
+    else
+      medium_sort(a, size, bench, 1, disorder);
+  } else {
+    if (disorder < 0.10)
+      medium_sort(a, size, bench, 1, disorder);
+    else
+      complex_sort(a, size, bench, 1, disorder);
+  }
 }
+
+// This method can be true
+// void adaptive_sort(t_list **a, int size, int bench) {
+//   double disorder;
+
+//   // Look again the sizes it might be wrong here
+//   disorder = compute_disorder(*a, size);
+//     if (disorder < 0.2)
+//       simple_sort(a, size, 1, disorder, bench);
+//     else if (disorder < 0.5)
+//       medium_sort(a, size, bench, 1, disorder);
+//     else
+//       complex_sort(a, size, bench, 1, disorder);
+//   }
+// }
