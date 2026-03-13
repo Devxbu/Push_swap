@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:01:02 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/12 23:26:07 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 03:29:14 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	complex_sort(t_list **a, int size, t_op_counter *ops)
 
 	b = NULL;
 	bit_amount = 0;
+	if (size <= 6)
+	{
+		simple_sort(a, size, ops);
+		return ;
+	}
 	while ((1 << bit_amount) < size)
 	{
 		i = 0;

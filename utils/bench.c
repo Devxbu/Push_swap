@@ -87,6 +87,16 @@ static void	print_ops(t_op_counter *ops, int total, int fd)
 	write(fd, "\n", 1);
 }
 
+static void	print_complexity(int chosen_mode, int fd)
+{
+	if (chosen_mode == SIMPLE)
+		ft_putstr_fd("Simple / O(n^2)", fd);
+	else if (chosen_mode == MEDIUM)
+		ft_putstr_fd("Medium / O(n*sqrt(n))", fd);
+	else
+		ft_putstr_fd("Complex / O(n*log(n))", fd);
+}
+
 void	bench_print(double disorder, t_mode mode, t_op_counter *ops)
 {
 	int	total;
@@ -99,14 +109,13 @@ void	bench_print(double disorder, t_mode mode, t_op_counter *ops)
 	print_disorder(disorder, 2);
 	write(2, "\n", 1);
 	ft_putstr_fd("[bench] strategy: ", 2);
-	if (mode == SIMPLE)
-		ft_putstr_fd("Simple / O(n^2)", 2);
-	else if (mode == MEDIUM)
-		ft_putstr_fd("Medium / O(n*sqrt(n))", 2);
-	else if (mode == COMPLEX)
-		ft_putstr_fd("Complex / O(n*log(n))", 2);
+	if (mode == ADAPTIVE)
+	{
+		ft_putstr_fd("Adaptive -> ", 2);
+		print_complexity(ops->chosen_mode, 2);
+	}
 	else
-		ft_putstr_fd("Adaptive", 2);
+		print_complexity(ops->chosen_mode, 2);
 	write(2, "\n", 1);
 	print_ops(ops, total, 2);
 }

@@ -42,6 +42,7 @@ typedef struct s_op_counter
 	int				rrb_counter;
 	int				rrr_counter;
 	int				op_bool_control;
+	int				chosen_mode;
 
 }					t_op_counter;
 

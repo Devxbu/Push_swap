@@ -14,6 +14,7 @@
 
 void	execute_strategy(t_mode mode, t_list **a, int size, t_op_counter *ops)
 {
+	ops->chosen_mode = mode;
 	if (mode == SIMPLE)
 		simple_sort(a, size, ops);
 	else if (mode == MEDIUM)

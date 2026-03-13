@@ -48,4 +48,5 @@ void	init_ops(t_op_counter *ops)
 	ops->rrb_counter = 0;
 	ops->rrr_counter = 0;
 	ops->op_bool_control = 0;
+	ops->chosen_mode = ADAPTIVE;
 }
