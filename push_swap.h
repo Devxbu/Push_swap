@@ -6,16 +6,13 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 11:41:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 12:20:14 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 13:52:43 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <limits.h>
-# include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
