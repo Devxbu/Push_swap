@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:00:59 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/12 23:24:16 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 12:14:45 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,19 @@ static int	square(int size)
 
 static void	chunk_psh(t_list **a, t_list **b, int size, t_op_counter *ops)
 {
-	int	chunk_size;
 	int	chunk_num;
 	int	chunk_min;
-	int	current_size;
 	int	i;
 
-	chunk_size = square(size);
 	chunk_num = 0;
 	while (*a)
 	{
 		i = 0;
-		chunk_min = chunk_num * chunk_size;
-		current_size = ft_lstsize(*a);
-		while (i++ < current_size)
+		chunk_min = (chunk_num++) * square(size);
+		while (i++ < ft_lstsize(*a))
 		{
 			if ((*a)->content >= chunk_min && (*a)->content < chunk_min
-				+ chunk_size)
+				+ square(size))
 			{
 				pb(a, b, ops);
 				ops->pb_counter++;
@@ -73,7 +69,6 @@ static void	chunk_psh(t_list **a, t_list **b, int size, t_op_counter *ops)
 				ops->ra_counter++;
 			}
 		}
-		chunk_num++;
 	}
 }
 
@@ -94,7 +89,7 @@ static void	chunk_pll(t_list **a, t_list **b, t_op_counter *ops)
 
 void	medium_sort(t_list **a, int size, t_op_counter *ops)
 {
-	t_list *b;
+	t_list	*b;
 
 	b = NULL;
 	if (size <= 1 || is_sorted(*a))

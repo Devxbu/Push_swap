@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 07:49:35 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/12 23:07:43 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 10:54:11 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ static t_list	*setup(int argc, char **argv, int *size, t_op_counter *ops)
 	return (a);
 }
 
-static void	run(t_mode mode, t_list **a, int size, int bench, t_op_counter *ops)
+static void	run(t_mode mode, t_list **a, int size, t_op_counter *ops)
 {
 	double	disorder;
 
-	ops->op_bool_control = bench;
 	disorder = compute_disorder(*a, size);
 	if (!is_sorted(*a))
 		execute_strategy(mode, a, size, ops);
-	if (bench)
+	if (ops->op_bool_control)
 		bench_print(disorder, mode, ops);
 }
 
@@ -68,7 +67,8 @@ int	main(int argc, char **argv)
 	bench = 0;
 	mode = parse_mode(&argc, &argv, &bench);
 	a = setup(argc, argv, &size, &ops);
-	run(mode, &a, size, bench, &ops);
+	ops.op_bool_control = bench;
+	run(mode, &a, size, &ops);
 	free_stack(a);
 	return (0);
 }

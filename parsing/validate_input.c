@@ -6,58 +6,53 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:35:38 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/04 18:35:00 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 11:03:50 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-#include <stdlib.h>
-
-static void	ft_free(char **arr)
-{
-	size_t	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-static int	only_spaces(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
-	{
-		if (str[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static void	exit_err(int *nums, char **arr)
 {
 	if (arr)
-		ft_free(arr);
+		arr_free(arr);
 	if (nums)
 		free(nums);
 	write(2, "Error\n", 6);
 	exit(1);
 }
 
-static char	**generate_arr(int argc, char **argv, int *total)
+static char	**fill_arr(char **arr, int argc, char **argv)
 {
+	char	**split;
 	int		i;
 	int		j;
 	int		k;
+
+	i = 1;
+	k = 0;
+	while (i < argc)
+	{
+		split = ft_split(argv[i], ' ');
+		i++;
+		if (!split)
+		{
+			arr_free(arr);
+			return (NULL);
+		}
+		j = 0;
+		while (split[j])
+			arr[k++] = split[j++];
+		free(split);
+	}
+	arr[k] = NULL;
+	return (arr);
+}
+
+static char	**generate_arr(int argc, char **argv, int *total)
+{
+	int		i;
 	char	**arr;
-	char	**split;
 
 	*total = 0;
 	i = 1;
@@ -73,34 +68,7 @@ static char	**generate_arr(int argc, char **argv, int *total)
 	arr = malloc(sizeof(char *) * (*total + 1));
 	if (!arr)
 		return (NULL);
-	i = 1;
-	k = 0;
-	while (i < argc)
-	{
-		split = ft_split(argv[i++], ' ');
-		if (!split)
-			return (ft_free(arr), NULL);
-		j = 0;
-		while (split[j])
-			arr[k++] = split[j++];
-		free(split);
-	}
-	arr[k] = NULL;
-	return (arr);
-}
-
-static int	is_duplicate(int *arr, int size, int num)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (arr[i] == num)
-			return (1);
-		i++;
-	}
-	return (0);
+	return (fill_arr(arr, argc, argv));
 }
 
 int	*validate_input(int argc, char **argv, int *size)
@@ -124,6 +92,6 @@ int	*validate_input(int argc, char **argv, int *size)
 			exit_err(nums, arr);
 		i++;
 	}
-	ft_free(arr);
+	arr_free(arr);
 	return (nums);
 }

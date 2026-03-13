@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:32:05 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/12 23:09:35 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 12:22:51 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	init_ops(t_op_counter *ops)
 	ops->rrr_counter = 0;
 	ops->op_bool_control = 0;
 	ops->chosen_mode = ADAPTIVE;
+	ops->bit_pass = 0;
 }

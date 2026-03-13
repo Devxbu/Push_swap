@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:00:56 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 00:04:28 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 12:23:18 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,15 @@ static void	sort_three(t_list **a, t_op_counter *ops)
 	two = (*a)->next->content;
 	three = (*a)->next->next->content;
 	if (one > two && two < three && one < three)
-	{
-		sa(a, ops);
-		ops->sa_counter++;
-	}
+		move_one(a, ops);
 	else if (one > two && two > three)
-	{
-		sa(a, ops);
-		ops->sa_counter++;
-		rra(a, ops);
-		ops->rra_counter++;
-	}
+		move_two(a, ops);
 	else if (one > two && one > three)
-	{
-		ra(a, ops);
-		ops->ra_counter++;
-	}
+		move_three(a, ops);
 	else if (one < two && two > three && one < three)
-	{
-		sa(a, ops);
-		ops->sa_counter++;
-		ra(a, ops);
-		ops->ra_counter++;
-	}
+		move_four(a, ops);
 	else if (one < two && two > three)
-	{
-		rra(a, ops);
-		ops->rra_counter++;
-	}
+		move_five(a, ops);
 }
 
 static int	find_min_position(t_list *a)

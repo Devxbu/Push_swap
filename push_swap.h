@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 11:41:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 02:37:55 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 12:20:14 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_op_counter
 	int				rrr_counter;
 	int				op_bool_control;
 	int				chosen_mode;
+	int				bit_pass;
 
 }					t_op_counter;
 
@@ -91,6 +92,9 @@ void				bring_to_top_b(t_list **b, int position, int size,
 // Parsing
 t_mode				parse_mode(int *argc, char ***argv, int *bench);
 int					*validate_input(int argc, char **argv, int *size);
+void				arr_free(char **arr);
+int					only_spaces(char *str);
+int					is_duplicate(int *arr, int size, int num);
 
 // Strategy
 void				execute_strategy(t_mode mode, t_list **a, int size,
@@ -107,5 +111,12 @@ void				bench_print(double disorder, t_mode mode,
 						t_op_counter *ops);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
+
+// simple_sort utils
+void				move_one(t_list **a, t_op_counter *ops);
+void				move_two(t_list **a, t_op_counter *ops);
+void				move_three(t_list **a, t_op_counter *ops);
+void				move_four(t_list **a, t_op_counter *ops);
+void				move_five(t_list **a, t_op_counter *ops);
 
 #endif

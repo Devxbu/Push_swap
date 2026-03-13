@@ -3,31 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:36:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:36:48 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 12:23:43 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+static void	ft_swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 static int	*bubble_sort(int size, int *arr)
 {
 	int	i;
 	int	j;
-	int	temp;
 	int	*sorted;
 
 	sorted = malloc(sizeof(int) * size);
 	if (!sorted)
 		return (NULL);
 	i = 0;
-	while (i < size)
-	{
-		sorted[i] = arr[i];
-		i++;
-	}
+	while (i++ < size)
+		sorted[i - 1] = arr[i - 1];
 	i = 0;
 	while (i < size - 1)
 	{
@@ -35,11 +40,7 @@ static int	*bubble_sort(int size, int *arr)
 		while (j < size - i - 1)
 		{
 			if (sorted[j] > sorted[j + 1])
-			{
-				temp = sorted[j];
-				sorted[j] = sorted[j + 1];
-				sorted[j + 1] = temp;
-			}
+				ft_swap(&sorted[j], &sorted[j + 1]);
 			j++;
 		}
 		i++;
@@ -59,25 +60,19 @@ int	*index_finder(int size, int *arr)
 		return (NULL);
 	index_arr = malloc(sizeof(int) * size);
 	if (!index_arr)
-	{
-		free(sorted);
-		return (NULL);
-	}
+		return (free(sorted), NULL);
 	i = 0;
-	while (i < size)
+	while (i++ < size)
 	{
 		j = 0;
-		while (j < size)
+		while (j++ < size)
 		{
-			if (arr[i] == sorted[j])
+			if (arr[i - 1] == sorted[j - 1])
 			{
-				index_arr[i] = j;
+				index_arr[i - 1] = j - 1;
 				break ;
 			}
-			j++;
 		}
-		i++;
 	}
-	free(sorted);
-	return (index_arr);
+	return (free(sorted), index_arr);
 }
