@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = cc
-CFLAGS = 
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = main.c \
@@ -9,7 +9,7 @@ SRCS = main.c \
 	parsing/parsing_mode.c parsing/validate_input.c \
 	sort/simple_sort.c sort/medium_sort.c sort/complex_sort.c sort/medium_utils.c\
 	strategy/adaptive.c strategy/execute_strategy.c \
-	utils/disorder.c utils/free.c utils/ft_split.c utils/index.c utils/is_sorted.c utils/safe_atoi.c utils/stack_init.c 
+	utils/bench.c utils/disorder.c utils/free.c utils/ft_split.c utils/index.c utils/is_sorted.c utils/safe_atoi.c utils/stack_init.c 
 
 OBJS = $(SRCS:.c=.o)
 

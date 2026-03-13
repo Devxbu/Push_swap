@@ -6,20 +6,20 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:31:53 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/28 07:19:53 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/12 23:10:02 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	execute_strategy(t_mode mode, t_list **a, int size)
+void	execute_strategy(t_mode mode, t_list **a, int size, t_op_counter *ops)
 {
 	if (mode == SIMPLE)
-		simple_sort(a, size);
+		simple_sort(a, size, ops);
 	else if (mode == MEDIUM)
-		medium_sort(a, size);
+		medium_sort(a, size, ops);
 	else if (mode == COMPLEX)
-		complex_sort(a, size);
+		complex_sort(a, size, ops);
 	else if (mode == ADAPTIVE)
-		adaptive_sort(a, size);
+		adaptive_sort(a, size, ops);
 }

@@ -6,37 +6,50 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:00:56 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/03 20:36:34 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 00:04:28 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	sort_three(t_list **a)
+static void	sort_three(t_list **a, t_op_counter *ops)
 {
-	int	oneth;
-	int	twoth;
-	int	threeth;
+	int	one;
+	int	two;
+	int	three;
 
-	oneth = (*a)->content;
-	twoth = (*a)->next->content;
-	threeth = (*a)->next->next->content;
-	if (oneth > twoth && twoth < threeth && oneth < threeth)
-		sa(a);
-	else if (oneth > twoth && twoth > threeth)
+	one = (*a)->content;
+	two = (*a)->next->content;
+	three = (*a)->next->next->content;
+	if (one > two && two < three && one < three)
 	{
-		sa(a);
-		rra(a);
+		sa(a, ops);
+		ops->sa_counter++;
 	}
-	else if (oneth > twoth && twoth < threeth && oneth > threeth)
-		ra(a);
-	else if (oneth < twoth && twoth > threeth && oneth < threeth)
+	else if (one > two && two > three)
 	{
-		sa(a);
-		ra(a);
+		sa(a, ops);
+		ops->sa_counter++;
+		rra(a, ops);
+		ops->rra_counter++;
 	}
-	else if (oneth < twoth && twoth > threeth && oneth > threeth)
-		rra(a);
+	else if (one > two && one > three)
+	{
+		ra(a, ops);
+		ops->ra_counter++;
+	}
+	else if (one < two && two > three && one < three)
+	{
+		sa(a, ops);
+		ops->sa_counter++;
+		ra(a, ops);
+		ops->ra_counter++;
+	}
+	else if (one < two && two > three)
+	{
+		rra(a, ops);
+		ops->rra_counter++;
+	}
 }
 
 static int	find_min_position(t_list *a)
@@ -61,22 +74,28 @@ static int	find_min_position(t_list *a)
 	return (tmp_min_value);
 }
 
-static void	bring_to_top(t_list **a, int position, int size)
+static void	bring_to_top(t_list **a, int position, int size, t_op_counter *ops)
 {
 	if (position <= size / 2)
 	{
 		while (position-- > 0)
-			ra(a);
+		{
+			ra(a, ops);
+			ops->ra_counter++;
+		}
 	}
 	else
 	{
 		position = size - position;
 		while (position-- > 0)
-			rra(a);
+		{
+			rra(a, ops);
+			ops->rra_counter++;
+		}
 	}
 }
 
-static void	sort_small(t_list **a, t_list **b, int size)
+static void	sort_small(t_list **a, t_list **b, int size, t_op_counter *ops)
 {
 	int	to_push;
 	int	current_size;
@@ -87,17 +106,21 @@ static void	sort_small(t_list **a, t_list **b, int size)
 	i = 0;
 	while (i < to_push)
 	{
-		bring_to_top(a, find_min_position(*a), current_size);
-		pb(a, b);
+		bring_to_top(a, find_min_position(*a), current_size, ops);
+		pb(a, b, ops);
+		ops->pb_counter++;
 		current_size--;
 		i++;
 	}
-	sort_three(a);
+	sort_three(a, ops);
 	while (*b)
-		pa(a, b);
+	{
+		pa(a, b, ops);
+		ops->pa_counter++;
+	}
 }
 
-void	simple_sort(t_list **a, int size)
+void	simple_sort(t_list **a, int size, t_op_counter *ops)
 {
 	t_list	*b;
 
@@ -107,10 +130,13 @@ void	simple_sort(t_list **a, int size)
 	if (size == 2)
 	{
 		if ((*a)->content > (*a)->next->content)
-			sa(a);
+		{
+			sa(a, ops);
+			ops->sa_counter++;
+		}
 	}
 	else if (size == 3)
-		sort_three(a);
+		sort_three(a, ops);
 	else
-		sort_small(a, &b, size);
+		sort_small(a, &b, size, ops);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:30:44 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/26 19:30:45 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/13 00:00:00 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,25 @@ static int	rotate_stack(t_list **stack)
 	return (1);
 }
 
-int	ra(t_list **a)
+int	ra(t_list **a, t_op_counter *ops)
 {
 	if (!rotate_stack(a))
 		return (0);
-	write(1, "ra\n", 3);
+	if (!ops->op_bool_control)
+		write(1, "ra\n", 3);
 	return (1);
 }
 
-int	rb(t_list **b)
+int	rb(t_list **b, t_op_counter *ops)
 {
 	if (!rotate_stack(b))
 		return (0);
-	write(1, "rb\n", 3);
+	if (!ops->op_bool_control)
+		write(1, "rb\n", 3);
 	return (1);
 }
 
-int	rr(t_list **a, t_list **b)
+int	rr(t_list **a, t_list **b, t_op_counter *ops)
 {
 	int	did_something;
 
@@ -50,7 +52,7 @@ int	rr(t_list **a, t_list **b)
 		did_something = 1;
 	if (rotate_stack(b))
 		did_something = 1;
-	if (did_something)
+	if (did_something && !ops->op_bool_control)
 		write(1, "rr\n", 3);
 	return (did_something);
 }

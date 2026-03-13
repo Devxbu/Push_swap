@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 07:49:35 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/02/28 11:42:52 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/12 23:07:43 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,53 @@ static void	exit_err(int *nums, int *indexes)
 	exit(1);
 }
 
-int	main(int argc, char **argv)
+static t_list	*setup(int argc, char **argv, int *size, t_op_counter *ops)
 {
-	t_mode	mode;
-	t_list	*a;
 	int		*nums;
 	int		*indexes;
-	int		size;
+	t_list	*a;
+
+	init_ops(ops);
+	nums = validate_input(argc, argv, size);
+	if (!nums)
+		exit_err(NULL, NULL);
+	indexes = index_finder(*size, nums);
+	if (!indexes)
+		exit_err(nums, NULL);
+	a = create_stack(*size, indexes);
+	if (!a)
+		exit_err(nums, indexes);
+	free(nums);
+	free(indexes);
+	return (a);
+}
+
+static void	run(t_mode mode, t_list **a, int size, int bench, t_op_counter *ops)
+{
+	double	disorder;
+
+	ops->op_bool_control = bench;
+	disorder = compute_disorder(*a, size);
+	if (!is_sorted(*a))
+		execute_strategy(mode, a, size, ops);
+	if (bench)
+		bench_print(disorder, mode, ops);
+}
+
+int	main(int argc, char **argv)
+{
+	t_mode			mode;
+	t_list			*a;
+	int				size;
+	int				bench;
+	t_op_counter	ops;
 
 	if (argc < 2)
 		return (0);
-	mode = parse_mode(&argc, &argv);
-	nums = validate_input(argc, argv, &size);
-	if (!nums)
-		exit_err(NULL, NULL);
-	indexes = index_finder(size, nums);
-	if (!indexes)
-		exit_err(nums, NULL);
-	a = create_stack(size, indexes);
-	if (!a)
-		exit_err(nums, indexes);
-	if (!is_sorted(a))
-		execute_strategy(mode, &a, size);
-	free_all(nums, indexes, a);
+	bench = 0;
+	mode = parse_mode(&argc, &argv, &bench);
+	a = setup(argc, argv, &size, &ops);
+	run(mode, &a, size, bench, &ops);
+	free_stack(a);
 	return (0);
 }

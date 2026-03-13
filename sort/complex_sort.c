@@ -6,13 +6,13 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:01:02 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/10 16:26:54 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/12 23:26:07 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	complex_sort(t_list **a, int size)
+void	complex_sort(t_list **a, int size, t_op_counter *ops)
 {
 	int		i;
 	int		bit_amount;
@@ -25,13 +25,24 @@ void	complex_sort(t_list **a, int size)
 		i = 0;
 		while (i++ < size)
 		{
+			if (!(*a))
+				break ;
 			if (((*a)->content >> bit_amount) & 1)
-				ra(a);
+			{
+				ra(a, ops);
+				ops->ra_counter++;
+			}
 			else
-				pb(a, &b);
+			{
+				pb(a, &b, ops);
+				ops->pb_counter++;
+			}
 		}
 		while (b)
-			pa(a, &b);
+		{
+			pa(a, &b, ops);
+			ops->pa_counter++;
+		}
 		bit_amount++;
 	}
 }
