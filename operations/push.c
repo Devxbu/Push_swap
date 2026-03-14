@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:30:29 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 00:00:00 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/14 17:42:39 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	pa(t_list **a, t_list **b, t_op_counter *ops)
 	*b = (*b)->next;
 	temp->next = *a;
 	*a = temp;
-	if (!ops->op_bool_control)
-		write(1, "pa\n", 3);
+	(void)ops;
+	write(1, "pa\n", 3);
 	return (1);
 }
 
@@ -31,13 +31,13 @@ int	pb(t_list **a, t_list **b, t_op_counter *ops)
 {
 	t_list	*temp;
 
+	(void)ops;
 	if (!(*a))
 		return (0);
 	temp = *a;
 	*a = (*a)->next;
 	temp->next = *b;
 	*b = temp;
-	if (!ops->op_bool_control)
-		write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
 	return (1);
 }

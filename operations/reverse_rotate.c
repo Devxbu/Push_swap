@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:30:37 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 00:00:00 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/14 17:42:45 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ static int	reverse_stack(t_list **stack)
 
 int	rra(t_list **a, t_op_counter *ops)
 {
+	(void)ops;
 	if (!reverse_stack(a))
 		return (0);
-	if (!ops->op_bool_control)
-		write(1, "rra\n", 4);
+	write(1, "rra\n", 4);
 	return (1);
 }
 
 int	rrb(t_list **b, t_op_counter *ops)
 {
+	(void)ops;
 	if (!reverse_stack(b))
 		return (0);
-	if (!ops->op_bool_control)
-		write(1, "rrb\n", 4);
+	write(1, "rrb\n", 4);
 	return (1);
 }
 
@@ -51,12 +51,13 @@ int	rrr(t_list **a, t_list **b, t_op_counter *ops)
 {
 	int	did_something;
 
+	(void)ops;
 	did_something = 0;
 	if (reverse_stack(a))
 		did_something = 1;
 	if (reverse_stack(b))
 		did_something = 1;
-	if (did_something && !ops->op_bool_control)
+	if (did_something)
 		write(1, "rrr\n", 4);
 	return (did_something);
 }
