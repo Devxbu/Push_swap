@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: buranli <buranli@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 23:26:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/14 17:05:54 by buranli          ###   ########.fr       */
+/*   Updated: 2026/03/14 18:57:12 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,26 @@ static void	print_ops(t_op_counter *ops, int total, int fd)
 	print_ops_rotate(ops, fd);
 }
 
-static void	print_complexity(int chosen_mode, int fd)
+static void	print_complexity(t_mode mode, int chosen_mode, int fd)
 {
-	if (chosen_mode == SIMPLE)
-		ft_putstr_fd("Simple / O(n^2)", fd);
-	else if (chosen_mode == MEDIUM)
-		ft_putstr_fd("Medium / O(n√n)", fd);
+	if (mode != ADAPTIVE)
+	{
+		if (chosen_mode == SIMPLE)
+			ft_putstr_fd("Simple / O(n^2)", fd);
+		else if (chosen_mode == MEDIUM)
+			ft_putstr_fd("Medium / O(n√n)", fd);
+		else
+			ft_putstr_fd("Complex / O(n log n)", fd);
+	}
 	else
-		ft_putstr_fd("Complex / O(n log n)", fd);
+	{
+		if (chosen_mode == SIMPLE)
+			ft_putstr_fd("Adaptive / O(n^2)", fd);
+		else if (chosen_mode == MEDIUM)
+			ft_putstr_fd("Adaptive / O(n√n)", fd);
+		else
+			ft_putstr_fd("Adaptive / O(n log n)", fd);
+	}
 }
 
 void	bench_print(double disorder, t_mode mode, t_op_counter *ops)
@@ -78,16 +90,14 @@ void	bench_print(double disorder, t_mode mode, t_op_counter *ops)
 	int	total;
 
 	total = ops->sa_counter + ops->sb_counter + ops->ss_counter
-		+ ops->pa_counter + ops->pb_counter + ops->ra_counter
-		+ ops->rb_counter + ops->rr_counter + ops->rra_counter
-		+ ops->rrb_counter + ops->rrr_counter;
+		+ ops->pa_counter + ops->pb_counter + ops->ra_counter + ops->rb_counter
+		+ ops->rr_counter + ops->rra_counter + ops->rrb_counter
+		+ ops->rrr_counter;
 	ft_putstr_fd("[bench] disorder: ", 2);
 	print_disorder(disorder, 2);
 	write(2, "\n", 1);
 	ft_putstr_fd("[bench] strategy: ", 2);
-	if (mode == ADAPTIVE)
-		ft_putstr_fd("Adaptive -> ", 2);
-	print_complexity(ops->chosen_mode, 2);
+	print_complexity(mode, ops->chosen_mode, 2);
 	write(2, "\n", 1);
 	print_ops(ops, total, 2);
 }
