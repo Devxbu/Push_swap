@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
+/*   By: buranli <buranli@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 23:26:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 00:00:00 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/14 17:05:54 by buranli          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static void	print_complexity(int chosen_mode, int fd)
 	if (chosen_mode == SIMPLE)
 		ft_putstr_fd("Simple / O(n^2)", fd);
 	else if (chosen_mode == MEDIUM)
-		ft_putstr_fd("Medium / O(n*sqrt(n))", fd);
+		ft_putstr_fd("Medium / O(n√n)", fd);
 	else
-		ft_putstr_fd("Complex / O(n*log(n))", fd);
+		ft_putstr_fd("Complex / O(n log n)", fd);
 }
 
 void	bench_print(double disorder, t_mode mode, t_op_counter *ops)
