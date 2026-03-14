@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 11:41:48 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 13:52:43 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/14 15:16:35 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,9 @@ void				move_two(t_list **a, t_op_counter *ops);
 void				move_three(t_list **a, t_op_counter *ops);
 void				move_four(t_list **a, t_op_counter *ops);
 void				move_five(t_list **a, t_op_counter *ops);
+
+// medium_sort utils
+void				medium_move_one(t_list **a, t_list **b, t_op_counter *ops);
+void				medium_move_two(t_list **a, t_op_counter *ops);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: melmbaz <melmbaz@student.42istanbul.com.tr>+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:00:59 by melmbaz           #+#    #+#             */
-/*   Updated: 2026/03/13 12:14:45 by melmbaz          ###   ########.fr       */
+/*   Updated: 2026/03/14 15:14:56 by melmbaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,28 @@ static int	square(int size)
 
 static void	chunk_psh(t_list **a, t_list **b, int size, t_op_counter *ops)
 {
+	int	chunk_size;
 	int	chunk_num;
 	int	chunk_min;
+	int	current_size;
 	int	i;
 
+	chunk_size = square(size);
 	chunk_num = 0;
 	while (*a)
 	{
 		i = 0;
-		chunk_min = (chunk_num++) * square(size);
-		while (i++ < ft_lstsize(*a))
+		chunk_min = chunk_num * chunk_size;
+		current_size = ft_lstsize(*a);
+		while (i++ < current_size)
 		{
 			if ((*a)->content >= chunk_min && (*a)->content < chunk_min
-				+ square(size))
-			{
-				pb(a, b, ops);
-				ops->pb_counter++;
-			}
+				+ chunk_size)
+				medium_move_one(a, b, ops);
 			else
-			{
-				ra(a, ops);
-				ops->ra_counter++;
-			}
+				medium_move_two(a, ops);
 		}
+		chunk_num++;
 	}
 }
 
